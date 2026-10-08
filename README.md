@@ -6,4 +6,4 @@ Click di link belo so yu go view di live interactive dashboard:
 ---
 
 ### 📈 Dashboard Preview
-![Meta Ads Dashboard Preview](Screenshot%202026-10-08%20114822.jpg)
+![Meta Ads Dashboard Preview](Screenshot%202026-10-08%20114822.png)
