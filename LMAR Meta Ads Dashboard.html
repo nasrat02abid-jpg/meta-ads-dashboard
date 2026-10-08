@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>LMAR Meta Ads Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--card:#0f1320;--tx:#e8ecf5;--mu:#7d869c;--a:#6c5cff;--b:#00e0b8;--c:#ff6b9d;--d:#ffb84d;--e:#4da3ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 400px at 10% -10%,#6c5cff33,transparent),radial-gradient(700px 400px at 100% 0,#00e0b822,transparent),var(--bg);color:var(--tx);font-family:Syne,system-ui,sans-serif;padding:20px}
+h1{font-size:26px;margin:0}h1 span{color:var(--b)}.sub{color:var(--mu);font:12px 'JetBrains Mono',monospace;margin:4px 0 18px}
+.g{display:grid;gap:14px}.k{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.two{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:14px}
+.c{background:var(--card);border:1px solid #1d2338;border-radius:14px;padding:16px}
+.c small{color:var(--mu);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.v{font:700 24px 'JetBrains Mono',monospace;margin-top:6px}.c h3{margin:0 0 12px;font-size:14px}
+.r{display:grid;grid-template-columns:130px 1fr 62px;gap:8px;align-items:center;font-size:11px;margin:5px 0}
+.r i{display:block;height:9px;border-radius:5px;transform-origin:left;animation:w 1s ease both}.r b{font:11px 'JetBrains Mono',monospace;text-align:right}
+@keyframes w{from{transform:scaleX(0)}}.n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--mu)}
+.dn{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.lg div{font-size:12px;margin:4px 0}.lg span{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+.ins li{margin:6px 0;font-size:13px;color:#c5cbdc}button{margin-top:16px;background:var(--a);color:#fff;border:0;border-radius:8px;padding:9px 16px;font:600 13px Syne}
+@media print{button{display:none}}
+</style></head><body>
+<h1>Meta Ads <span>Performance</span></h1><div class="sub">LMAR · 2 Sep – 1 Oct 2026 · Amounts in PKR · 26 campaign rows</div>
+<div class="g k">
+<div class="c"><small>Total Spend</small><div class="v">105,704</div></div>
+<div class="c"><small>Impressions</small><div class="v">1.06M</div></div>
+<div class="c"><small>Awareness Reach</small><div class="v">484,667</div></div>
+<div class="c"><small>Conversations</small><div class="v">1,051</div></div>
+<div class="c"><small>Cost / Conversation</small><div class="v">70.3</div></div></div>
+<div class="g two">
+<div class="c"><h3>Spend by objective</h3><div class="dn"><svg id="dn" width="150" height="150" viewBox="0 0 42 42"></svg><div class="lg" id="lg"></div></div></div>
+<div class="c"><h3>Spend by delivery status</h3><div id="st"></div></div></div>
+<div class="g two"><div class="c" style="grid-column:1/-1"><h3>Cost per messaging conversation (PKR) — lower is better</h3><div id="cp"></div></div></div>
+<div class="g two"><div class="c" style="grid-column:1/-1"><h3>Key insights</h3><ul class="ins">
+<li>~70% of spend (PKR 73.9K) went to messaging campaigns, producing 1,051 conversations.</li>
+<li>Both Yaseen campaigns are the most efficient at ~PKR 52 per conversation; Huda (199) and Afab (156) are the costliest, on very small samples.</li>
+<li>Only 4 campaigns are active and they account for ~10% of spend; 18 inactive campaigns carry ~70%.</li>
+<li>Post-engagement and link-click campaigns cost under PKR 9 per result, but they are different result types and should not be compared with conversations.</li></ul>
+<button onclick="window.print()">Export PDF</button></div></div>
+<script>
+const col=['#6c5cff','#00e0b8','#ff6b9d','#ffb84d','#4da3ff'];
+const obj=[['Messaging',73881.08],['Post Engagement',15822.55],['Awareness (Reach)',10419.58],['Link Clicks',3830.27],['Leads',1750.83]];
+const tot=obj.reduce((s,o)=>s+o[1],0);let off=0,h='',l='';
+obj.forEach((o,i)=>{const p=o[1]/tot*100;h+=`<circle cx="21" cy="21" r="15.9" fill="none" stroke="${col[i]}" stroke-width="5" stroke-dasharray="${p} ${100-p}" stroke-dashoffset="${25-off}"/>`;off+=p;l+=`<div><span style="background:${col[i]}"></span>${o[0]} · ${p.toFixed(1)}%</div>`});
+dn.innerHTML=h;lg.innerHTML=l;
+function bars(el,data,max,fmt,cf){el.innerHTML=data.map((d,i)=>`<div class="r"><div class="n">${d[0]}</div><div><i style="width:${d[1]/max*100}%;background:${cf?cf(d[1]):col[i%5]}"></i></div><b>${fmt(d[1])}</b></div>`).join('')}
+bars(st,[['Inactive',74159.73],['Archived',18868.99],['Active',10339.07],['Not delivering',2336.52]],74159.73,v=>Math.round(v).toLocaleString());
+const cp=[['Yaseen',52.3],['Yaseen FT2',52.5],['Home sale',59.9],['DHA',62.4],['F',64.6],['Sir DHa 1',68.8],['Traffic (msg)',71.3],['Nehal',73.0],['N Regi',73.2],['H DHA',75.4],['SIR DHA',96.3],['N DHA',105.9],['New Glexa',107.4],['Sir New DHA',112.8],['Nihal RMT',116.9],['Glexa',122.6],['Afab',155.9],['Huda',199.5]];
+bars(cp_=document.getElementById('cp'),cp,200,v=>v.toFixed(1),v=>v<70?'#00e0b8':v<100?'#ffb84d':'#ff6b9d');
+</script></body></html>
